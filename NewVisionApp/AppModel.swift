@@ -2,7 +2,7 @@
 //  AppModel.swift
 //  NewVisionApp
 //
-//  Created by Alumno on 07/06/25.
+//  Created by SantiQ on 07/06/25.
 //
 
 import SwiftUI
