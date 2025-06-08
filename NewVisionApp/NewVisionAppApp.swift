@@ -13,10 +13,26 @@ struct NewVisionAppApp: App {
     @State private var appModel = AppModel()
 
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(appModel)
+        WindowGroup(id: "main") {
+            ContentView().environment(appModel)
         }
+        
+        WindowGroup(id: "PhysicsBowlingTab") {
+            PhysicsBowlingTab()
+        }
+        .defaultSize(width: 200, height: 200) // Cambia a lo que necesites
+        
+        WindowGroup(id: "PhysicsBeachTab") {
+            PhysicsBeachTab()
+        }
+        .defaultSize(width: 200, height: 200) // Cambia a lo que necesites
+        
+        WindowGroup(id: "PhysicsImmediateTab") {
+            PhysicsImmediateTab()
+        }
+        .defaultSize(width: 400, height: 300) // Ajusta a tu gusto
+
+
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

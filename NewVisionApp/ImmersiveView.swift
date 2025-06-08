@@ -1,30 +1,29 @@
-//
-//  ImmersiveView.swift
-//  NewVisionApp
-//
-//  Created by Alumno on 07/06/25.
-//
-
 import SwiftUI
 import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
+    @Environment(\.openWindow) private var openWindow
+    @State private var immersiveEntity: Entity?
 
     var body: some View {
         RealityView { content in
-            // Add the initial RealityKit content
-            if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                content.add(immersiveContentEntity)
-
-                // Put skybox here.  See example in World project available at
-                // https://developer.apple.com/
+            // Si la entidad está cargada, la agregamos
+            if let entity = immersiveEntity {
+                content.add(entity)
             }
         }
+        .task {
+            // Cargar la entidad asíncronamente en background
+            do {
+                immersiveEntity = try await Entity(named: "Immersive", in: realityKitContentBundle)
+            } catch {
+                print("Error cargando entidad: \(error)")
+            }
+        }
+        .onAppear {
+            // Abrir ventana inmediata justo al entrar a la escena
+            openWindow(id: "PhysicsImmediateTab")
+        }
     }
-}
-
-#Preview(immersionStyle: .mixed) {
-    ImmersiveView()
-        .environment(AppModel())
 }
