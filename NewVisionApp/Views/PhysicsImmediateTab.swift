@@ -19,6 +19,10 @@ struct PhysicsImmediateTab: View {
 
             Button(action: {
                 Task {
+                    
+                    //await openImmersiveSpace(id: "physiSpace")
+
+                    
                     // Cierra la ventana actual
                     dismissWindow()
 
