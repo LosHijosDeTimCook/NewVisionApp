@@ -1,22 +1,22 @@
-//
-//  AppModel.swift
-//  NewVisionApp
-//
-//  Created by SantiQ on 07/06/25.
-//
-// Rigo test Santi Test
-
 import SwiftUI
-
-/// Maintains app-wide state
-@MainActor
-@Observable
-class AppModel {
-    let immersiveSpaceID = "ImmersiveSpace"
+import Observation
+ 
+@Observable class AppModel {
+    var immersiveSpaceID = "ImmersiveSpace"
+    var immersiveSpaceState: ImmersiveSpaceState = .closed
+    var showImmersiveSpace = false
+ 
+ 
     enum ImmersiveSpaceState {
         case closed
-        case inTransition
+        case opening
         case open
+        case closing
+        case inTransition
     }
-    var immersiveSpaceState = ImmersiveSpaceState.closed
+ 
+    func reset() {
+        immersiveSpaceState = .closed
+        showImmersiveSpace = false
+    }
 }
