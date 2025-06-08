@@ -7,136 +7,14 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Sphere_Left", "Earth", "Sphere_Right", "GridMaterial"]
+    reorder nameChildren = ["residential_complex_modern_apartment_building", "Earth", "Building", "Beach_Ball", "Bowling_Ball", "GridMaterial"]
     def "GridMaterial" (
         active = true
-        prepend references = @Materials/GridMaterial.usda@
+        references = @Materials/GridMaterial.usda@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "Earth" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        prepend references = @Earth.usdz@
-    )
-    {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        quatf xformOp:orient = (0.99999994, 0, 0, 0)
-        float3 xformOp:scale = (2, 2, 2)
-        float3 xformOp:translate = (0.28218716, 2.5516071, -1.436261)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "RigidBody"
-        {
-            bool gravityEnabled = 1
-            uniform token info:id = "RealityKit.RigidBody"
-            bool isCCDEnabled = 1
-
-            def RealityKitStruct "massFrame"
-            {
-                float m_mass = 0.001
-
-                def RealityKitStruct "m_pose"
-                {
-                }
-            }
-
-            def RealityKitStruct "material"
-            {
-                double dynamicFriction = 0.1
-                double restitution = 0.1
-                double staticFriction = 0.1
-            }
-        }
-
-        def RealityKitComponent "Collider"
-        {
-            uint group = 1
-            uniform token info:id = "RealityKit.Collider"
-            uint mask = 4294967295
-            token type = "Default"
-
-            def RealityKitStruct "Shape"
-            {
-                float3 extent = (0.20499998, 0.205, 0.20500001)
-                float radius = 0.10250001
-                token shapeType = "Sphere"
-
-                def RealityKitStruct "pose"
-                {
-                    float3 position = (0.00004060194, 0, 0.00011316314)
-                }
-            }
-        }
-    }
-
-    def "Building" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        customData = {
-            float3 rotationEulerHint = (0, 0.52359885, 0)
-        }
-        prepend references = @Building.usdz@
-    )
-    {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        quatf xformOp:orient = (0.9659258, 0, 0.25881904, 0)
-        float3 xformOp:scale = (0.04, 0.04, 0.04)
-        float3 xformOp:translate = (0, 0, -1.3332437)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "Collider"
-        {
-            uint group = 1
-            uniform token info:id = "RealityKit.Collider"
-            uint mask = 4294967295
-            token type = "Default"
-
-            def RealityKitStruct "Shape"
-            {
-                float3 extent = (31.065552, 31.44081, 33.582664)
-                float radius = 16.791332
-                token shapeType = "Sphere"
-
-                def RealityKitStruct "pose"
-                {
-                    float3 position = (-1.2308154, 15.723681, -0.9311137)
-                }
-            }
-        }
-
-        def RealityKitComponent "RigidBody"
-        {
-            bool gravityEnabled = 0
-            uniform token info:id = "RealityKit.RigidBody"
-            bool isCCDEnabled = 1
-            bool lockRotationX = 1
-            bool lockRotationY = 1
-            bool lockRotationZ = 1
-            bool lockTranslationX = 1
-            bool lockTranslationY = 1
-            bool lockTranslationZ = 1
-
-            def RealityKitStruct "massFrame"
-            {
-                float m_mass = 0
-
-                def RealityKitStruct "m_pose"
-                {
-                }
-            }
-
-            def RealityKitStruct "material"
-            {
-            }
-        }
     }
 
     def "Beach_Ball" (
@@ -144,17 +22,20 @@ def Xform "Root"
         customData = {
             float3 rotationEulerHint = (1.7453295, 1.7453293, 0.17453313)
         }
-        prepend references = @Beach_Ball.usdz@
+        references = @Beach_Ball.usdz@
     )
     {
+        reorder nameChildren = ["residential_complex_modern_apartment_building", "Materials", "Meshes", "RigidBody", "Collider"]
         quatf xformOp:orient = (-0.4627487, -0.44761428, -0.5334459, 0.5485804)
         float3 xformOp:scale = (0.0005, 0.0005, 0.0005)
-        float3 xformOp:translate = (0.6403518, 0.9030994, -1.559886)
+        float3 xformOp:translate = (1.5442212, 2.7274742, -0.72076845)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "RigidBody"
         {
+            bool gravityEnabled = 0
             uniform token info:id = "RealityKit.RigidBody"
+            bool isCCDEnabled = 1
             float linearDamping = 0.0009
 
             def RealityKitStruct "massFrame"
@@ -184,7 +65,7 @@ def Xform "Root"
             def RealityKitStruct "Shape"
             {
                 float3 extent = (199.99988, 199.03004, 199.99992)
-                float radius = 99.99996
+                float radius = 0.05
                 token shapeType = "Sphere"
 
                 def RealityKitStruct "pose"
@@ -193,6 +74,13 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitComponent "MotionState"
+        {
+            uniform token info:id = "RealityKit.MotionState"
+            float3 m_userSetLinearVelocity = (0, -0.5, 0)
+            uint m_userSetLinearVelocityVersion = 1
+        }
     }
 
     def "Bowling_Ball" (
@@ -200,17 +88,19 @@ def Xform "Root"
         customData = {
             float3 rotationEulerHint = (0, 1.7453289, 0)
         }
-        prepend references = @Bowling_Ball.usdz@
+        references = @Bowling_Ball.usdz@
     )
     {
         quatf xformOp:orient = (0.64278764, 0, 0.7660444, 0)
         float3 xformOp:scale = (0.004, 0.004, 0.004)
-        float3 xformOp:translate = (0.74, 0.9, -1.3617555)
+        float3 xformOp:translate = (1.8640363, 2.699997, -0.8702422)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "RigidBody"
         {
+            bool gravityEnabled = 0
             uniform token info:id = "RealityKit.RigidBody"
+            bool isCCDEnabled = 1
             float linearDamping = 0.0001
 
             def RealityKitStruct "massFrame"
@@ -239,7 +129,7 @@ def Xform "Root"
             def RealityKitStruct "Shape"
             {
                 float3 extent = (23.98292, 23.990917, 23.994736)
-                float radius = 11.997368
+                float radius = 0.05
                 token shapeType = "Sphere"
 
                 def RealityKitStruct "pose"
@@ -248,6 +138,24 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitComponent "MotionState"
+        {
+            uniform token info:id = "RealityKit.MotionState"
+            float3 m_userSetLinearVelocity = (0, -1, 0)
+            uint m_userSetLinearVelocityVersion = 1
+        }
+    }
+
+    def "residential_complex_modern_apartment_building" (
+        active = true
+        references = @residential_complex_modern_apartment_building.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 5.922945e-9, -1.5763767e-8, -9.409073e-9)
+        float3 xformOp:scale = (0.01, 0.009999996, 0.009999999)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 
